@@ -3,7 +3,7 @@ import {
   type ButtonProps,
   makeStyles,
 } from "@fluentui/react-components";
-import { Link, type To } from "react-router";
+import { Link, type To } from "react-router-dom";
 
 const useStyles = makeStyles({
   link: {
