@@ -8,16 +8,13 @@ import {
 } from "@fluentui/react-components";
 import { FluentLink, Table, ButtonLink } from "~/components";
 import { ArrowRightRegular, WindowNewRegular } from "@fluentui/react-icons";
+import { getRacesLink } from "~/helpers/utils";
 
 interface SeasonsListProps {
   data: IGetSeasonsResponse;
 }
 
 export const SeasonsList: React.FC<SeasonsListProps> = ({ data }) => {
-  function getRacesLink(season: string) {
-    return `/season/${season}`;
-  }
-
   const columns: TableColumnDefinition<TSeason>[] = [
     createTableColumn({
       columnId: "season",

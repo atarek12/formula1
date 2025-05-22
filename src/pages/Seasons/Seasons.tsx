@@ -1,31 +1,37 @@
 import React from "react";
 import { useGetSeasons } from "~/API";
-import { ErrorMessage, PageLoading } from "~/components";
+import { ErrorMessage, PageLoading, Pagination } from "~/components";
 import { useViewContext, ViewEnum } from "~/context";
 import { SeasonsGrid } from "./SeasonsGrid";
 import { SeasonsList } from "./SeasonsList";
+import { usePagination } from "~/helpers";
 
 interface SeasonsProps {}
 
 export const Seasons: React.FC<SeasonsProps> = () => {
   const [view] = useViewContext();
-  const { data, isLoading, error } = useGetSeasons({});
-
-  if (isLoading) {
-    return <PageLoading />;
-  }
+  const { currentPage, limit, offset, setPage, setPageSize } = usePagination();
+  const { data, isLoading, error } = useGetSeasons({ limit, offset });
 
   if (error) {
     return <ErrorMessage message={error.message} />;
   }
 
-  if (!data) {
-    return <div>No data available</div>;
-  }
-
   return (
     <div>
-      {view === ViewEnum.GRID ? (
+      <h1>All Seasons</h1>
+      <Pagination
+        totalItems={data?.total}
+        pageSize={data?.limit}
+        currentPage={currentPage}
+        onPageChange={setPage}
+        onPageSizeChange={setPageSize}
+      />
+      {isLoading ? (
+        <PageLoading />
+      ) : !data ? (
+        <ErrorMessage message="No data available" />
+      ) : view === ViewEnum.GRID ? (
         <SeasonsGrid data={data} />
       ) : (
         <SeasonsList data={data} />

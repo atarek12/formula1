@@ -22,7 +22,7 @@ export const GridSkeleton: React.FC<GridSkeletonProps> = ({ count = 10 }) => {
       {data.map((_, i) => (
         // eslint-disable-next-line react-x/no-array-index-key
         <Skeleton key={i} aria-label="Loading Content">
-          <SkeletonItem size={128} />
+          <SkeletonItem size={72} />
         </Skeleton>
       ))}
     </div>

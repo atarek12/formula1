@@ -17,7 +17,7 @@ export const useGetSeasons = (params: IGetSeasonsRequest = {}) => {
   const { limit = 30, offset = 0 } = params;
 
   return useQuery<IGetSeasonsResponse>({
-    queryKey: ["seasons"],
+    queryKey: ["seasons", limit, offset],
     queryFn: () =>
       baseFetch<IGetSeasonsResponse>(
         `seasons.json?limit=${limit}&offset=${offset}`,

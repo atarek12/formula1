@@ -15,6 +15,7 @@ import {
 import React from "react";
 import type { IGetSeasonsResponse } from "~/API";
 import { ButtonLink } from "~/components";
+import { getRacesLink } from "~/helpers/utils";
 
 const useStyles = makeStyles({
   root: {
@@ -31,10 +32,6 @@ interface SeasonsGridProps {
 export const SeasonsGrid: React.FC<SeasonsGridProps> = ({ data }) => {
   const styles = useStyles();
   const linkRef = React.useRef<HTMLAnchorElement>(null);
-
-  const getRacesLink = (season: string) => {
-    return `/season/${season}`;
-  };
 
   const onCardClick = () => {
     linkRef.current?.click();
