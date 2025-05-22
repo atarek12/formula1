@@ -1,12 +1,12 @@
 import React from "react";
-import type { IGetSeasonsResponse, TSeason } from "../../API";
+import type { IGetSeasonsResponse, TSeason } from "~/API";
 import {
   createTableColumn,
   Link,
   Tooltip,
   type TableColumnDefinition,
 } from "@fluentui/react-components";
-import { FluentLink, Table, ButtonLink } from "../../components";
+import { FluentLink, Table, ButtonLink } from "~/components";
 import { ArrowRightRegular, WindowNewRegular } from "@fluentui/react-icons";
 
 interface SeasonsListProps {

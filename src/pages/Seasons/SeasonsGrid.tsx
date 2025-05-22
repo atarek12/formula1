@@ -1,5 +1,5 @@
 import React from "react";
-import type { IGetSeasonsResponse } from "../../API";
+import type { IGetSeasonsResponse } from "~/API";
 
 interface SeasonsGridProps {
   data: IGetSeasonsResponse;

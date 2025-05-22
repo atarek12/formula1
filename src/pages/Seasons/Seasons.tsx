@@ -1,7 +1,7 @@
 import React from "react";
-import { useGetSeasons } from "../../API";
-import { ErrorMessage, TableSkeleton } from "../../components";
-import { useViewContext, ViewEnum } from "../../context";
+import { useGetSeasons } from "~/API";
+import { ErrorMessage, TableSkeleton } from "~/components";
+import { useViewContext, ViewEnum } from "~/context";
 import { SeasonsGrid } from "./SeasonsGrid";
 import { SeasonsList } from "./SeasonsList";
 
