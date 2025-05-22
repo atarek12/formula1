@@ -23,6 +23,7 @@ const useStyles = makeStyles({
   title: {
     display: "flex",
     alignItems: "center",
+    gap: "40px",
   },
   logo: {
     fontSize: "2rem",
@@ -51,14 +52,12 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         <div className={styles.headerContent}>
           <div className={styles.title}>
             <span className={styles.logo}>F1</span>
+            <AppBreadcrumbs />
           </div>
           <SwitchView />
         </div>
       </header>
-      <main className={styles.main}>
-        <AppBreadcrumbs />
-        {children}
-      </main>
+      <main className={styles.main}>{children}</main>
     </div>
   );
 };
