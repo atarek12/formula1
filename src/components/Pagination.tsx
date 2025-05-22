@@ -53,14 +53,17 @@ export const Pagination: React.FC<PaginationProps> = ({
     }
   };
 
+  const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newSize = Number(e.target.value);
+    onPageChange?.(1);
+    onPageSizeChange?.(newSize);
+  };
+
   return (
     <div className={styles.root}>
       <div className={styles.flex}>
         <Label>Page Size:</Label>
-        <Select
-          value={pageSize}
-          onChange={(e) => onPageSizeChange?.(Number(e.target.value))}
-        >
+        <Select value={pageSize} onChange={handlePageSizeChange}>
           {PageSizeOptions.map((size) => (
             <option key={size} value={size}>
               {size}
