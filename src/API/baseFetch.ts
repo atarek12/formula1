@@ -17,5 +17,10 @@ export const baseFetch = async <T = unknown>(
     throw new Error(`Error ${res.status}: ${res.statusText} - ${errorMessage}`);
   }
 
-  return res.json();
+  const json = await res.json();
+  if (json?.MRData?.status === "error") {
+    throw new Error(json?.MRData?.message);
+  }
+
+  return json.MRData;
 };
