@@ -1,1 +1,1 @@
-export * from "./Seasons";
+export * from "./SeasonsPage";

@@ -6,9 +6,9 @@ import { SeasonsGrid } from "./SeasonsGrid";
 import { SeasonsList } from "./SeasonsList";
 import { usePagination } from "~/helpers";
 
-interface SeasonsProps {}
+interface SeasonsPageProps {}
 
-export const Seasons: React.FC<SeasonsProps> = () => {
+export const SeasonsPage: React.FC<SeasonsPageProps> = () => {
   const [view] = useViewContext();
   const { currentPage, limit, offset, setPage, setPageSize } = usePagination();
   const { data, isLoading, error } = useGetSeasons({ limit, offset });

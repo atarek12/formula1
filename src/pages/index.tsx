@@ -1,9 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Seasons } from "./Seasons";
+import { SeasonsPage } from "./Seasons";
+import { RacesPage } from "./Races";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Seasons />,
+    element: <SeasonsPage />,
+  },
+  {
+    path: "seasons/:seasonId/races",
+    element: <RacesPage />,
   },
 ]);
