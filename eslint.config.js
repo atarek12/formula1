@@ -31,6 +31,8 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
 			"prettier/prettier": ["warn", { endOfLine: "auto" }],
+			"@typescript-eslint/no-empty-object-type": "off",
+			"no-empty-pattern": "off",
     },
   }
 );
