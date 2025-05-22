@@ -1,6 +1,7 @@
 import { makeStyles, tokens } from "@fluentui/react-components";
 import React from "react";
 import { SwitchView } from "./SwitchView";
+import { AppBreadcrumbs } from "./AppBreadcrumbs";
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +33,9 @@ const useStyles = makeStyles({
     maxWidth: "1400px",
     margin: "0 auto",
     padding: "1rem",
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem",
   },
 });
 
@@ -51,7 +55,10 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
           <SwitchView />
         </div>
       </header>
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        <AppBreadcrumbs />
+        {children}
+      </main>
     </div>
   );
 };
