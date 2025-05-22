@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetSeasons } from "~/API";
-import { ErrorMessage, TableSkeleton } from "~/components";
+import { ErrorMessage, PageLoading } from "~/components";
 import { useViewContext, ViewEnum } from "~/context";
 import { SeasonsGrid } from "./SeasonsGrid";
 import { SeasonsList } from "./SeasonsList";
@@ -12,7 +12,7 @@ export const Seasons: React.FC<SeasonsProps> = () => {
   const { data, isLoading, error } = useGetSeasons({});
 
   if (isLoading) {
-    return <TableSkeleton columnHeaders={["Season", "Wiki"]} />;
+    return <PageLoading />;
   }
 
   if (error) {
