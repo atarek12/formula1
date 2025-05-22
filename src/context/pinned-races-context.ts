@@ -1,8 +1,8 @@
 import { useReactQueryContext } from "./baseContext";
 
-const KEY = "PINNED_RACES";
+export function useGetPinnedRaces(season: string) {
+  const KEY = `PINNED_RACES_${season}`;
 
-export function useGetPinnedRaces() {
   const storageValue = localStorage.getItem(KEY);
 
   const initialValue = storageValue?.split(",") ?? [];

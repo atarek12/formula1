@@ -6,6 +6,7 @@ import { useViewContext, ViewEnum } from "~/context";
 import { usePagination } from "~/helpers";
 import { RacesGrid } from "./RacesGrid";
 import { RacesList } from "./RacesList";
+import { useGetSortedRaces } from "~/helpers/useGetSortedRaces";
 
 interface RacesPageProps {}
 
@@ -20,6 +21,8 @@ export const RacesPage: React.FC<RacesPageProps> = ({}) => {
     offset,
   });
 
+  const sortedData = useGetSortedRaces(data);
+
   if (error) {
     return <ErrorMessage message={error.message} />;
   }
@@ -28,20 +31,20 @@ export const RacesPage: React.FC<RacesPageProps> = ({}) => {
     <div>
       <h1>All Races</h1>
       <Pagination
-        totalItems={data?.total}
-        pageSize={data?.limit}
+        totalItems={sortedData?.total}
+        pageSize={sortedData?.limit}
         currentPage={currentPage}
         onPageChange={setPage}
         onPageSizeChange={setPageSize}
       />
       {isLoading ? (
         <PageLoading />
-      ) : !data ? (
+      ) : !sortedData ? (
         <ErrorMessage message="No data available" />
       ) : view === ViewEnum.GRID ? (
-        <RacesGrid data={data} />
+        <RacesGrid data={sortedData} />
       ) : (
-        <RacesList data={data} />
+        <RacesList data={sortedData} />
       )}
     </div>
   );

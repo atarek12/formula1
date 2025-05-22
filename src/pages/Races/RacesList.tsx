@@ -20,7 +20,9 @@ interface RacesListProps {
 }
 
 export const RacesList: React.FC<RacesListProps> = ({ data }) => {
-  const [pinnedRaces, setPinnedRaces] = useGetPinnedRaces();
+  const [pinnedRaces, setPinnedRaces] = useGetPinnedRaces(
+    data.RaceTable.season,
+  );
 
   const handleUnpinClick = (round: string) => {
     const updatedPinnedRaces = pinnedRaces.filter((item) => item !== round);

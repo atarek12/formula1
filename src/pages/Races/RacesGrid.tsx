@@ -36,7 +36,9 @@ interface RacesGridProps {
 
 export const RacesGrid: React.FC<RacesGridProps> = ({ data }) => {
   const styles = useStyles();
-  const [pinnedRaces, setPinnedRaces] = useGetPinnedRaces();
+  const [pinnedRaces, setPinnedRaces] = useGetPinnedRaces(
+    data.RaceTable.season,
+  );
 
   const handleUnpinClick = (round: string) => {
     const updatedPinnedRaces = pinnedRaces.filter((item) => item !== round);
