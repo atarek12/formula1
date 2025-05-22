@@ -3,6 +3,7 @@ import { RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { router } from "./pages";
+import { AppWrapper } from "./components";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,7 +21,9 @@ function App() {
     <FluentProvider theme={webLightTheme}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <RouterProvider router={router} />
+        <AppWrapper>
+          <RouterProvider router={router} />
+        </AppWrapper>
       </QueryClientProvider>
     </FluentProvider>
   );

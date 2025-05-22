@@ -5,3 +5,5 @@ export * from "./ButtonLink";
 export * from "./FluentLink";
 export * from "./PageLoading";
 export * from "./GridSkeleton";
+export * from "./AppWrapper";
+export * from "./SwitchView";
