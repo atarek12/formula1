@@ -10,7 +10,7 @@ export function useReactQueryContext<T>(key: string, initial?: T) {
 
   const { data = initial } = useQuery({
     queryKey: KEY,
-    queryFn: () => queryClient.getQueryData<T>(KEY),
+    queryFn: () => queryClient.getQueryData<T>(KEY) || "",
     staleTime: Infinity,
   });
 
