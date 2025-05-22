@@ -50,7 +50,7 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.title}>
-            <h1 className={styles.logo}>F1</h1>
+            <span className={styles.logo}>F1</span>
           </div>
           <SwitchView />
         </div>
