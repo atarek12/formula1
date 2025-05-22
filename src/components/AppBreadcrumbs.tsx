@@ -1,15 +1,35 @@
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbButton,
   BreadcrumbDivider,
 } from "@fluentui/react-components";
 import React from "react";
+import { useParams } from "react-router-dom";
+import { BreadcrumbButtonLink } from "./BreadcrumbButtonLink";
 
 interface AppBreadcrumbsProps {}
 
 export const AppBreadcrumbs: React.FC<AppBreadcrumbsProps> = () => {
-  const items = [{ name: "All Seasons", path: "/" }];
+  const params = useParams();
+  const items = [
+    { name: "All Seasons", path: "/" },
+    ...(params.seasonId
+      ? [
+          {
+            name: `Season ${params.seasonId}`,
+            path: `/seasons/${params.seasonId}/races`,
+          },
+        ]
+      : []),
+    ...(params.roundId
+      ? [
+          {
+            name: `Race ${params.roundId}`,
+            path: `/seasons/${params.seasonId}/races/${params.roundId}/results`,
+          },
+        ]
+      : []),
+  ];
 
   return (
     <Breadcrumb aria-label="Application breadcrumb">
@@ -19,9 +39,9 @@ export const AppBreadcrumbs: React.FC<AppBreadcrumbsProps> = () => {
           // eslint-disable-next-line react-x/no-array-index-key
           <React.Fragment key={index}>
             <BreadcrumbItem>
-              <BreadcrumbButton href={item.path} current={isLastItem}>
+              <BreadcrumbButtonLink to={item.path} current={isLastItem}>
                 {item.name}
-              </BreadcrumbButton>
+              </BreadcrumbButtonLink>
             </BreadcrumbItem>
             {!isLastItem && <BreadcrumbDivider />}
           </React.Fragment>

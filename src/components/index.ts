@@ -10,3 +10,4 @@ export * from "./SwitchView";
 export * from "./AppBreadcrumbs";
 export * from "./Pagination";
 export * from "./Grid";
+export * from "./BreadcrumbButtonLink";

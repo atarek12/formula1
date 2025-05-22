@@ -2,6 +2,7 @@ import { makeStyles, tokens } from "@fluentui/react-components";
 import React from "react";
 import { SwitchView } from "./SwitchView";
 import { AppBreadcrumbs } from "./AppBreadcrumbs";
+import { Outlet } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -40,11 +41,9 @@ const useStyles = makeStyles({
   },
 });
 
-interface AppWrapperProps {
-  children: React.ReactNode;
-}
+interface AppWrapperProps {}
 
-export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
+export const AppWrapper: React.FC<AppWrapperProps> = () => {
   const styles = useStyles();
   return (
     <div className={styles.root}>
@@ -57,7 +56,9 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
           <SwitchView />
         </div>
       </header>
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        <Outlet />
+      </main>
     </div>
   );
 };
