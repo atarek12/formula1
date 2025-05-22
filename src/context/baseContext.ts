@@ -4,7 +4,7 @@ import { useCallback, useEffect } from "react";
 type TUpdaterCallback<T> = (prev: T) => T;
 type TUpdater<T> = T | TUpdaterCallback<T>;
 
-export function useReactQueryContext<T>(key: string, initial?: T) {
+export function useReactQueryContext<T>(key: string, initial: T) {
   const KEY = [key];
   const queryClient = useQueryClient();
 
@@ -37,5 +37,5 @@ export function useReactQueryContext<T>(key: string, initial?: T) {
     }
   }, [data, initial, update]);
 
-  return { data: data as T, update };
+  return { data: (data as T) || initial, update };
 }
