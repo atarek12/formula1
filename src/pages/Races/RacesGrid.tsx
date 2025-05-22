@@ -14,6 +14,7 @@ import React from "react";
 import type { IGetSeasonRacesResponse } from "~/API";
 import { Grid } from "~/components";
 import { ItemCard } from "~/components/ItemCard";
+import { useGetPinnedRaces } from "~/context";
 import { formatDate, getRaceResultsLink } from "~/helpers";
 
 const useStyles = makeStyles({
@@ -35,10 +36,16 @@ interface RacesGridProps {
 
 export const RacesGrid: React.FC<RacesGridProps> = ({ data }) => {
   const styles = useStyles();
+  const [pinnedRaces, setPinnedRaces] = useGetPinnedRaces();
 
-  const pinnedRaces = ["1", "2", "3", "4"];
-
-  const handlePinClick = (round: string) => {};
+  const handleUnpinClick = (round: string) => {
+    const updatedPinnedRaces = pinnedRaces.filter((item) => item !== round);
+    setPinnedRaces(updatedPinnedRaces);
+  };
+  const handlePinClick = (round: string) => {
+    const updatedPinnedRaces = [...pinnedRaces, round];
+    setPinnedRaces(updatedPinnedRaces);
+  };
 
   return (
     <Grid>
@@ -62,7 +69,8 @@ export const RacesGrid: React.FC<RacesGridProps> = ({ data }) => {
                     icon={isPinned ? <PinFilled /> : <PinRegular />}
                     onClick={(e: React.MouseEvent) => {
                       e.stopPropagation();
-                      handlePinClick(item.round);
+                      if (isPinned) handleUnpinClick(item.round);
+                      else handlePinClick(item.round);
                     }}
                   />
                 </Tooltip>

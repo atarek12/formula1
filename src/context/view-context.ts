@@ -1,5 +1,7 @@
 import { useReactQueryContext } from "./baseContext";
 
+const KEY = "PREFERRED_VIEW";
+
 export const ViewEnum = {
   LIST: "LIST",
   GRID: "GRID",
@@ -8,9 +10,7 @@ export const ViewEnum = {
 export type ViewEnum = (typeof ViewEnum)[keyof typeof ViewEnum];
 
 export const useViewContext = () => {
-  const storageValue = localStorage.getItem(
-    "PREFERRED_VIEW",
-  ) as ViewEnum | null;
+  const storageValue = localStorage.getItem(KEY) as ViewEnum | null;
   const isValidValue = Object.values(ViewEnum).includes(
     storageValue as ViewEnum,
   );
@@ -19,12 +19,12 @@ export const useViewContext = () => {
     : ViewEnum.LIST;
 
   const { data, update } = useReactQueryContext<ViewEnum | undefined>(
-    "PREFERRED_VIEW",
+    KEY,
     initialValue,
   );
 
   const updateValue = (value: ViewEnum) => {
-    localStorage.setItem("PREFERRED_VIEW", value);
+    localStorage.setItem(KEY, value);
     update(value);
   };
 

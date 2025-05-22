@@ -12,6 +12,7 @@ import {
 import React from "react";
 import type { IGetSeasonRacesResponse, TRace } from "~/API";
 import { ButtonLink, FluentLink, Table } from "~/components";
+import { useGetPinnedRaces } from "~/context";
 import { formatDate, getRaceResultsLink } from "~/helpers";
 
 interface RacesListProps {
@@ -19,7 +20,16 @@ interface RacesListProps {
 }
 
 export const RacesList: React.FC<RacesListProps> = ({ data }) => {
-  const handlePinClick = (round: string) => {};
+  const [pinnedRaces, setPinnedRaces] = useGetPinnedRaces();
+
+  const handleUnpinClick = (round: string) => {
+    const updatedPinnedRaces = pinnedRaces.filter((item) => item !== round);
+    setPinnedRaces(updatedPinnedRaces);
+  };
+  const handlePinClick = (round: string) => {
+    const updatedPinnedRaces = [...pinnedRaces, round];
+    setPinnedRaces(updatedPinnedRaces);
+  };
 
   const columns: TableColumnDefinition<TRace>[] = [
     createTableColumn({
@@ -50,7 +60,7 @@ export const RacesList: React.FC<RacesListProps> = ({ data }) => {
       columnId: "actions",
       renderHeaderCell: () => null,
       renderCell: (item) => {
-        const isPinned = false;
+        const isPinned = pinnedRaces.includes(item.round);
         return (
           <div style={{ display: "flex", gap: "0.5rem" }}>
             <Tooltip
@@ -63,7 +73,8 @@ export const RacesList: React.FC<RacesListProps> = ({ data }) => {
                 icon={isPinned ? <PinFilled /> : <PinRegular />}
                 onClick={(e: React.MouseEvent) => {
                   e.stopPropagation();
-                  handlePinClick(item.round);
+                  if (isPinned) handleUnpinClick(item.round);
+                  else handlePinClick(item.round);
                 }}
               />
             </Tooltip>
