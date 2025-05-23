@@ -12,6 +12,7 @@ import { ResultsGrid } from "./ResultsGrid";
 import { ResultsList } from "./ResultsList";
 import { DriversSelector } from "./DriversSelector";
 import { makeStyles } from "@fluentui/react-components";
+import { useGetPreferredDrivers } from "~/context";
 
 const useStyles = makeStyles({
   filters: {
@@ -36,11 +37,16 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
     season,
     round,
   });
+  const [preferredDrivers, setPreferredDrivers] = useGetPreferredDrivers();
 
   const drivers = useMemo(() => {
     if (!data) return [];
     return data?.RaceTable.Races[0].Results.map((r) => r.Driver);
   }, [data]);
+
+  const onSelectedDriversChange = (selectedDrivers: string[]) => {
+    setPreferredDrivers(selectedDrivers);
+  };
 
   if (error) {
     return <ErrorMessage message={error.message} />;
@@ -57,7 +63,11 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
           onPageChange={setPage}
           onPageSizeChange={setPageSize}
         />
-        <DriversSelector drivers={drivers} />
+        <DriversSelector
+          drivers={drivers}
+          selectedDriverIds={preferredDrivers}
+          onSelectedDriverIdsChange={onSelectedDriversChange}
+        />
       </div>
       {isLoading ? (
         <PageLoading />

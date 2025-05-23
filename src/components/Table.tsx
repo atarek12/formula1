@@ -6,14 +6,32 @@ import {
   DataGridBody,
   DataGridCell,
   type TableColumnDefinition,
+  makeStyles,
+  tokens,
 } from "@fluentui/react-components";
+
+const useStyles = makeStyles({
+  highlight: {
+    outline: `1px solid ${tokens.colorStatusSuccessBorder1}`,
+    backgroundColor: tokens.colorStatusSuccessBackground1,
+  },
+});
 
 interface TableProps<T> {
   columns: TableColumnDefinition<T>[];
   rows: T[];
+  highlightRows?: string[];
+  getItemId?: (item: T) => string;
 }
 
-export function Table<T>({ rows, columns }: TableProps<T>) {
+export function Table<T>({
+  rows,
+  columns,
+  highlightRows,
+  getItemId,
+}: TableProps<T>) {
+  const styles = useStyles();
+
   return (
     <DataGrid items={rows} columns={columns}>
       <DataGridHeader>
@@ -23,14 +41,20 @@ export function Table<T>({ rows, columns }: TableProps<T>) {
           )}
         </DataGridRow>
       </DataGridHeader>
-      <DataGridBody>
-        {({ item, rowId }) => (
-          <DataGridRow key={rowId}>
-            {({ renderCell }) => (
-              <DataGridCell>{renderCell(item)}</DataGridCell>
-            )}
-          </DataGridRow>
-        )}
+      <DataGridBody<T>>
+        {({ item, rowId }) => {
+          const itemId = getItemId?.(item) || "";
+          return (
+            <DataGridRow
+              key={rowId}
+              className={highlightRows?.includes(itemId) && styles.highlight}
+            >
+              {({ renderCell }) => (
+                <DataGridCell>{renderCell(item)}</DataGridCell>
+              )}
+            </DataGridRow>
+          );
+        }}
       </DataGridBody>
     </DataGrid>
   );

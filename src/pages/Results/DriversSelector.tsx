@@ -7,8 +7,8 @@ import {
   type OptionOnSelectData,
   type SelectionEvents,
 } from "@fluentui/react-components";
-import { Dismiss12Regular } from "@fluentui/react-icons";
-import React, { useId, useMemo, useRef, useState } from "react";
+import { DismissRegular } from "@fluentui/react-icons";
+import React, { useId, useMemo, useRef } from "react";
 import type { TDriver } from "~/API";
 import { getDriverFullName } from "~/helpers";
 import { MobileMediaQuery } from "~/helpers/const";
@@ -45,13 +45,16 @@ const useStyles = makeStyles({
 
 interface DriversSelectorProps {
   drivers: TDriver[];
+  selectedDriverIds: string[];
+  onSelectedDriverIdsChange: (selectedDrivers: string[]) => void;
 }
 
 export const DriversSelector: React.FC<DriversSelectorProps> = ({
   drivers,
+  selectedDriverIds,
+  onSelectedDriverIdsChange,
 }) => {
   const styles = useStyles();
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   // generate ids for handling labelling
   const comboId = useId();
@@ -73,20 +76,20 @@ export const DriversSelector: React.FC<DriversSelectorProps> = ({
 
   const selectedDrivers = useMemo(() => {
     return sortedDrivers.filter((driver) =>
-      selectedOptions.includes(driver.driverId),
+      selectedDriverIds.includes(driver.driverId),
     );
-  }, [sortedDrivers, selectedOptions]);
+  }, [sortedDrivers, selectedDriverIds]);
 
   const onOptionSelect = (
     _event: SelectionEvents,
     data: OptionOnSelectData,
   ) => {
-    setSelectedOptions(data.selectedOptions);
+    onSelectedDriverIdsChange?.(data.selectedOptions);
   };
 
   const onTagClick = (option: string, index: number) => {
     // remove selected option
-    setSelectedOptions(selectedOptions.filter((o) => o !== option));
+    onSelectedDriverIdsChange(selectedDriverIds.filter((o) => o !== option));
 
     // focus previous or next option, defaulting to focusing back to the combo input
     const indexToFocus = index === 0 ? 1 : index - 1;
@@ -101,7 +104,7 @@ export const DriversSelector: React.FC<DriversSelectorProps> = ({
   };
 
   const labelledBy =
-    selectedOptions.length > 0 ? `${comboId} ${selectedListId}` : comboId;
+    selectedDriverIds.length > 0 ? `${comboId} ${selectedListId}` : comboId;
 
   return (
     <div className={styles.root}>
@@ -113,7 +116,7 @@ export const DriversSelector: React.FC<DriversSelectorProps> = ({
         positioning={{ autoSize: "width" }}
         listbox={{ className: styles.listbox }}
         value={""}
-        selectedOptions={selectedOptions}
+        selectedOptions={selectedDriverIds}
         onOptionSelect={onOptionSelect}
       >
         {sortedDrivers.map((driver) => (
@@ -122,7 +125,7 @@ export const DriversSelector: React.FC<DriversSelectorProps> = ({
           </Option>
         ))}
       </Dropdown>
-      {selectedOptions.length ? (
+      {selectedDrivers.length ? (
         <ul
           id={selectedListId}
           className={styles.tagsList}
@@ -138,7 +141,7 @@ export const DriversSelector: React.FC<DriversSelectorProps> = ({
                 size="small"
                 shape="circular"
                 appearance="primary"
-                icon={<Dismiss12Regular />}
+                icon={<DismissRegular fontSize={14} />}
                 iconPosition="after"
                 onClick={() => onTagClick(driver.driverId, i)}
                 id={`${comboId}-remove-${i}`}

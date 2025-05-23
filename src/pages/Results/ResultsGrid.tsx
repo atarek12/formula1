@@ -4,6 +4,7 @@ import React from "react";
 import type { IGetRaceResultsResponse } from "~/API";
 import { Grid } from "~/components";
 import { ItemCard } from "~/components/ItemCard";
+import { useGetPreferredDrivers } from "~/context";
 import { getDriverFullName } from "~/helpers";
 
 const useStyles = makeStyles({
@@ -20,12 +21,14 @@ interface ResultsGridProps {
 
 export const ResultsGrid: React.FC<ResultsGridProps> = ({ data }) => {
   const styles = useStyles();
+  const [preferredDrivers] = useGetPreferredDrivers();
 
   return (
     <Grid>
       {data.RaceTable.Races[0].Results.map((item) => {
         return (
           <ItemCard
+            highlight={preferredDrivers?.includes(item.Driver.driverId)}
             key={item.Driver.driverId}
             icon={<PersonRegular fontSize={50} />}
             header={

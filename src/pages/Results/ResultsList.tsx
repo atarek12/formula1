@@ -5,6 +5,7 @@ import {
 import React from "react";
 import type { IGetRaceResultsResponse, TResult } from "~/API";
 import { Table } from "~/components";
+import { useGetPreferredDrivers } from "~/context";
 import { getDriverFullName } from "~/helpers";
 
 interface ResultsListProps {
@@ -12,6 +13,8 @@ interface ResultsListProps {
 }
 
 export const ResultsList: React.FC<ResultsListProps> = ({ data }) => {
+  const [preferredDrivers] = useGetPreferredDrivers();
+
   const columns: TableColumnDefinition<TResult>[] = [
     createTableColumn({
       columnId: "name",
@@ -35,5 +38,12 @@ export const ResultsList: React.FC<ResultsListProps> = ({ data }) => {
     }),
   ];
 
-  return <Table rows={data.RaceTable.Races[0].Results} columns={columns} />;
+  return (
+    <Table
+      rows={data.RaceTable.Races[0].Results}
+      columns={columns}
+      highlightRows={preferredDrivers}
+      getItemId={(item) => item.Driver.driverId}
+    />
+  );
 };

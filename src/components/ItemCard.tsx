@@ -3,10 +3,19 @@ import {
   CardPreview,
   CardHeader,
   Tooltip,
+  makeStyles,
+  tokens,
 } from "@fluentui/react-components";
 import { ArrowRightRegular } from "@fluentui/react-icons";
 import React, { useRef } from "react";
 import { ButtonLink } from "./ButtonLink";
+
+const useStyles = makeStyles({
+  highlight: {
+    outline: `1px solid ${tokens.colorStatusSuccessBorder1}`,
+    backgroundColor: tokens.colorStatusSuccessBackground1,
+  },
+});
 
 interface ItemCardProps {
   header: React.ReactNode;
@@ -14,6 +23,7 @@ interface ItemCardProps {
   icon?: React.ReactNode;
   url?: string;
   tooltip?: string;
+  highlight?: boolean;
 }
 
 export const ItemCard: React.FC<ItemCardProps> = ({
@@ -22,7 +32,9 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   icon,
   url,
   tooltip,
+  highlight,
 }) => {
+  const styles = useStyles();
   const linkRef = useRef<HTMLAnchorElement>(null);
 
   const onCardClick = () => {
@@ -37,6 +49,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
 
   return (
     <Card
+      className={highlight && styles.highlight}
       orientation="horizontal"
       onClick={url ? onCardClick : undefined}
       onKeyDown={url ? onCardKeyDown : undefined}
