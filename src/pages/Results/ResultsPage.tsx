@@ -1,39 +1,19 @@
 import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useGetRaceResults } from "~/API";
-import {
-  ErrorMessage,
-  GridOrList,
-  PageLoading,
-  Pagination,
-} from "~/components";
-import { usePagination } from "~/helpers";
+import { ErrorMessage, GridOrList, PageLoading } from "~/components";
 import { ResultsGrid } from "./ResultsGrid";
 import { ResultsList } from "./ResultsList";
 import { DriversSelector } from "./DriversSelector";
-import { makeStyles } from "@fluentui/react-components";
 import { useGetPreferredDrivers } from "~/context";
-
-const useStyles = makeStyles({
-  filters: {
-    display: "flex",
-    gap: "1rem",
-    alignItems: "center",
-    flexWrap: "wrap",
-  },
-});
 
 interface ResultsPageProps {}
 
 export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
-  const styles = useStyles();
-  const { currentPage, limit, offset, setPage, setPageSize } = usePagination();
   const params = useParams();
   const season = params.seasonId || "";
   const round = params.roundId || "";
   const { data, isLoading, error } = useGetRaceResults({
-    limit,
-    offset,
     season,
     round,
   });
@@ -55,20 +35,11 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
   return (
     <div>
       <h1>Race Results</h1>
-      <div className={styles.filters}>
-        <Pagination
-          totalItems={data?.total}
-          pageSize={limit}
-          currentPage={currentPage}
-          onPageChange={setPage}
-          onPageSizeChange={setPageSize}
-        />
-        <DriversSelector
-          drivers={drivers}
-          selectedDriverIds={preferredDrivers}
-          onSelectedDriverIdsChange={onSelectedDriversChange}
-        />
-      </div>
+      <DriversSelector
+        drivers={drivers}
+        selectedDriverIds={preferredDrivers}
+        onSelectedDriverIdsChange={onSelectedDriversChange}
+      />
       {isLoading ? (
         <PageLoading />
       ) : !data ? (

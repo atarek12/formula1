@@ -8,7 +8,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { BreadcrumbButtonLink } from "./BreadcrumbButtonLink";
 import { useGetRaceResults } from "~/API";
-import { usePagination, usePrevious } from "~/helpers";
+import { usePrevious } from "~/helpers";
 
 const useStyles = makeStyles({
   root: {
@@ -23,12 +23,9 @@ interface AppBreadcrumbsProps {}
 export const AppBreadcrumbs: React.FC<AppBreadcrumbsProps> = () => {
   const styles = useStyles();
   const params = useParams();
-  const { limit, offset } = usePagination();
   const { data } = useGetRaceResults({
     season: params.seasonId || "",
     round: params.roundId || "",
-    limit,
-    offset,
   });
   const previousRaceName = usePrevious(data?.RaceTable.Races[0].raceName);
 
