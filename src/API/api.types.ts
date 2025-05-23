@@ -113,7 +113,7 @@ export type TResult = {
   position: string;
   positionText: string;
   status: string;
-  Time: TResultTime;
+  Time?: TResultTime;
   Driver: TDriver;
   FastestLap: TFastestLap;
   Constructor: TConstructor;

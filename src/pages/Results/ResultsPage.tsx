@@ -6,6 +6,7 @@ import { ResultsGrid } from "./ResultsGrid";
 import { ResultsList } from "./ResultsList";
 import { DriversSelector } from "./DriversSelector";
 import { useGetPreferredDrivers } from "~/context";
+import { ResultsChart } from "./ResultsChart";
 
 interface ResultsPageProps {}
 
@@ -45,10 +46,13 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
       ) : !data ? (
         <ErrorMessage message="No data available" />
       ) : (
-        <GridOrList
-          gridElement={<ResultsGrid data={data} />}
-          listElement={<ResultsList data={data} />}
-        />
+        <>
+          <GridOrList
+            gridElement={<ResultsGrid data={data} />}
+            listElement={<ResultsList data={data} />}
+          />
+          <ResultsChart results={data.RaceTable.Races[0].Results} />
+        </>
       )}
     </div>
   );
