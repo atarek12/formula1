@@ -51,7 +51,10 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
             gridElement={<ResultsGrid data={data} />}
             listElement={<ResultsList data={data} />}
           />
-          <ResultsChart results={data.RaceTable.Races[0].Results} />
+          <ResultsChart
+            results={data.RaceTable.Races[0].Results}
+            highlightDrivers={preferredDrivers}
+          />
         </>
       )}
     </div>

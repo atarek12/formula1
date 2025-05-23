@@ -21,9 +21,13 @@ const useStyles = makeStyles({
 
 interface ResultsChartProps {
   results: TResult[];
+  highlightDrivers?: string[];
 }
 
-export const ResultsChart: React.FC<ResultsChartProps> = ({ results }) => {
+export const ResultsChart: React.FC<ResultsChartProps> = ({
+  results,
+  highlightDrivers,
+}) => {
   const styles = useStyles();
 
   const resultsWithTime = useMemo(() => {
@@ -45,12 +49,14 @@ export const ResultsChart: React.FC<ResultsChartProps> = ({ results }) => {
             x: Number(result.Time!.millis) - minValue + 100,
             total: maxValue - minValue,
           },
-          color: tokens.colorBrandBackground,
+          color: highlightDrivers?.includes(result.Driver.driverId)
+            ? tokens.colorStatusSuccessBackground3
+            : tokens.colorBrandBackground,
           yAxisCalloutData: `${result.Time?.time}.`,
         },
       ],
     }));
-  }, [resultsWithTime, minValue, maxValue]);
+  }, [resultsWithTime, minValue, maxValue, highlightDrivers]);
 
   if (!data.length) {
     return <p>No results available</p>;
