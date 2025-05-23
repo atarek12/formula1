@@ -1,6 +1,6 @@
 import React from "react";
-import { useMediaQuery } from "usehooks-ts";
 import { useViewContext, ViewEnum } from "~/context";
+import { useIsMobile } from "~/helpers";
 
 interface GridOrListProps {
   gridElement: React.ReactNode;
@@ -11,8 +11,8 @@ export const GridOrList: React.FC<GridOrListProps> = ({
   gridElement,
   listElement,
 }) => {
-  const isMobile = useMediaQuery("(max-width: 768px)");
   const [view] = useViewContext();
+  const isMobile = useIsMobile();
 
   if (isMobile || view === ViewEnum.GRID) {
     return gridElement;

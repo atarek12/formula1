@@ -10,7 +10,7 @@ import {
 import { usePagination } from "~/helpers";
 import { RacesGrid } from "./RacesGrid";
 import { RacesList } from "./RacesList";
-import { useGetSortedRaces } from "~/helpers/useGetSortedRaces";
+import { useGetSortedRaces } from "~/helpers";
 
 interface RacesPageProps {}
 

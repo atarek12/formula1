@@ -48,7 +48,7 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
 
   return (
     <div>
-      <h1>Season Results</h1>
+      <h1>Race Results</h1>
       <div className={styles.filters}>
         <Pagination
           totalItems={data?.total}

@@ -3,7 +3,7 @@ import React from "react";
 import { SwitchView } from "./SwitchView";
 import { AppBreadcrumbs } from "./AppBreadcrumbs";
 import { Outlet } from "react-router-dom";
-import { useMediaQuery } from "usehooks-ts";
+import { useIsMobile } from "~/helpers";
 
 const useStyles = makeStyles({
   root: {
@@ -49,7 +49,7 @@ interface AppWrapperProps {}
 
 export const AppWrapper: React.FC<AppWrapperProps> = () => {
   const styles = useStyles();
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useIsMobile();
 
   return (
     <div className={styles.root}>

@@ -18,7 +18,10 @@ const useStyles = makeStyles({
     gap: "10px",
     alignItems: "center",
     flexWrap: "wrap",
-    marginBottom: "20px",
+
+    "@media (max-width: 600px)": {
+      marginBottom: "20px",
+    },
   },
   listbox: {
     maxHeight: "200px",
