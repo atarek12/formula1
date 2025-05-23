@@ -1,54 +1,43 @@
-# React + TypeScript + Vite
+# Formula 1
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This application list all F1 seasons and its results.
 
-Currently, two official plugins are available:
+## To run the project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Install NPM if you dont have it already. [Download Here](https://nodejs.org/en/download)
+- Install Yarn if you dont have it already.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install --global yarn
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Install the project dependencies.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+yarn install
 ```
+
+- Run the dev environment in localhost.
+
+```bash
+yarn dev
+```
+
+## Used packages and tools
+
+- React.js: Frontend library used to run build modern client apps.
+  - We could also use Next.js but non of the requirements needs its features.
+- FluentUI: Provides ready to use UI components which is full accessible, modern, customizable and easy to use.
+- React-router: Provides seamless navigation in the browser - client side rendering (CSR).
+- React-query: Used for two purposes
+  - API client library that deal with API calls and provides beautiful features.
+  - State management, it is not the best and not made for that purpose, but used it as the app state is not that complicated. better alternatives are react-context or Zustand.
+- Other tools: Typescript, Eslint, Prettier.
+
+## Folders
+
+- API: contains the client library of the API and its types.
+- components: contains shared components across the application.
+- context: contains state managements.
+- helpers: contains the shared utils and hooks across the project.
+- pages: contains the application pages.

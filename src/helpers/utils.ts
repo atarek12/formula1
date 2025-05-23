@@ -25,6 +25,7 @@ export function getDriverFullName(driver: TDriver) {
   return `${driver.givenName} ${driver.familyName}`;
 }
 
+// Converts milliseconds to a time string in the format "H:MM:SS.mmm"
 export function convertMillisToTime(millis: number) {
   const hours = Math.floor(millis / 3600000);
   const minutes = Math.floor((millis % 3600000) / 60000);

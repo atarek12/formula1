@@ -46,7 +46,7 @@ export const ResultsChart: React.FC<ResultsChartProps> = ({
         {
           legend: getDriverFullName(result.Driver),
           horizontalBarChartdata: {
-            x: Number(result.Time!.millis) - minValue + 100,
+            x: Number(result.Time!.millis) - minValue + 100, // Adding 100ms for better visibility for the first bar
             total: maxValue - minValue,
           },
           color: highlightDrivers?.includes(result.Driver.driverId)
