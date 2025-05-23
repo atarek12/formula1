@@ -15,6 +15,8 @@ const useStyles = makeStyles({
     padding: "1rem",
     maxWidth: "1400px",
     margin: "0 auto",
+    flexWrap: "wrap",
+    gap: "1rem",
   },
   header: {
     backgroundColor: tokens.colorBrandBackground2,
@@ -25,6 +27,7 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     gap: "40px",
+    flexWrap: "wrap",
   },
   logo: {
     fontSize: "2rem",

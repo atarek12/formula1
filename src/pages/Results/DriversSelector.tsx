@@ -17,7 +17,8 @@ const useStyles = makeStyles({
     display: "flex",
     gap: "10px",
     alignItems: "center",
-    // flexWrap: "wrap",
+    flexWrap: "wrap",
+    marginBottom: "20px",
   },
   listbox: {
     maxHeight: "200px",
@@ -29,14 +30,12 @@ const useStyles = makeStyles({
     paddingLeft: 0,
     display: "flex",
     gridGap: tokens.spacingHorizontalXXS,
+    maxWidth: "calc(100vw - 40px)",
     overflowX: "auto",
     "::-webkit-scrollbar": {
       display: "none",
     },
     scrollbarWidth: "none",
-    "& li": {
-      display: "inline-block",
-    },
   },
 });
 

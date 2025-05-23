@@ -2,14 +2,24 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbDivider,
+  makeStyles,
 } from "@fluentui/react-components";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { BreadcrumbButtonLink } from "./BreadcrumbButtonLink";
 
+const useStyles = makeStyles({
+  root: {
+    "& ol": {
+      flexWrap: "wrap",
+    },
+  },
+});
+
 interface AppBreadcrumbsProps {}
 
 export const AppBreadcrumbs: React.FC<AppBreadcrumbsProps> = () => {
+  const styles = useStyles();
   const params = useParams();
   const items = [
     { name: "All Seasons", path: "/" },
@@ -32,7 +42,7 @@ export const AppBreadcrumbs: React.FC<AppBreadcrumbsProps> = () => {
   ];
 
   return (
-    <Breadcrumb aria-label="Application breadcrumb">
+    <Breadcrumb aria-label="Application breadcrumb" className={styles.root}>
       {items.map((item, index) => {
         const isLastItem = index === items.length - 1;
         return (
