@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useGetRaceResults } from "~/API";
 import { ErrorMessage, PageLoading, Pagination } from "~/components";
@@ -6,10 +6,22 @@ import { useViewContext, ViewEnum } from "~/context";
 import { usePagination } from "~/helpers";
 import { ResultsGrid } from "./ResultsGrid";
 import { ResultsList } from "./ResultsList";
+import { DriversSelector } from "./DriversSelector";
+import { makeStyles } from "@fluentui/react-components";
+
+const useStyles = makeStyles({
+  filters: {
+    display: "flex",
+    gap: "1rem",
+    alignItems: "center",
+    flexWrap: "wrap",
+  },
+});
 
 interface ResultsPageProps {}
 
 export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
+  const styles = useStyles();
   const [view] = useViewContext();
   const { currentPage, limit, offset, setPage, setPageSize } = usePagination();
   const params = useParams();
@@ -22,6 +34,11 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
     round,
   });
 
+  const drivers = useMemo(() => {
+    if (!data) return [];
+    return data?.RaceTable.Races[0].Results.map((r) => r.Driver);
+  }, [data]);
+
   if (error) {
     return <ErrorMessage message={error.message} />;
   }
@@ -29,13 +46,16 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
   return (
     <div>
       <h1>Season Results</h1>
-      <Pagination
-        totalItems={data?.total}
-        pageSize={limit}
-        currentPage={currentPage}
-        onPageChange={setPage}
-        onPageSizeChange={setPageSize}
-      />
+      <div className={styles.filters}>
+        <Pagination
+          totalItems={data?.total}
+          pageSize={limit}
+          currentPage={currentPage}
+          onPageChange={setPage}
+          onPageSizeChange={setPageSize}
+        />
+        <DriversSelector drivers={drivers} />
+      </div>
       {isLoading ? (
         <PageLoading />
       ) : !data ? (
