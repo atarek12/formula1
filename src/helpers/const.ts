@@ -8,3 +8,5 @@ export const QueryParams = {
   PAGE: "page",
   PAGE_SIZE: "pageSize",
 };
+
+export const MobileMediaQuery = "(max-width: 600px)";

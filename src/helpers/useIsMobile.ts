@@ -1,6 +1,7 @@
 import { useMediaQuery } from "usehooks-ts";
+import { MobileMediaQuery } from "./const";
 
 export function useIsMobile() {
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery(MobileMediaQuery);
   return isMobile;
 }

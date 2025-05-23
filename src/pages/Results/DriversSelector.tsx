@@ -11,6 +11,7 @@ import { Dismiss12Regular } from "@fluentui/react-icons";
 import React, { useId, useMemo, useRef, useState } from "react";
 import type { TDriver } from "~/API";
 import { getDriverFullName } from "~/helpers";
+import { MobileMediaQuery } from "~/helpers/const";
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     flexWrap: "wrap",
 
-    "@media (max-width: 600px)": {
+    [`@media ${MobileMediaQuery}`]: {
       marginBottom: "20px",
     },
   },
