@@ -1,8 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetSeasonRaces } from "~/API";
-import { ErrorMessage, PageLoading, Pagination } from "~/components";
-import { useViewContext, ViewEnum } from "~/context";
+import {
+  ErrorMessage,
+  GridOrList,
+  PageLoading,
+  Pagination,
+} from "~/components";
 import { usePagination } from "~/helpers";
 import { RacesGrid } from "./RacesGrid";
 import { RacesList } from "./RacesList";
@@ -11,7 +15,6 @@ import { useGetSortedRaces } from "~/helpers/useGetSortedRaces";
 interface RacesPageProps {}
 
 export const RacesPage: React.FC<RacesPageProps> = ({}) => {
-  const [view] = useViewContext();
   const { currentPage, limit, offset, setPage, setPageSize } = usePagination();
   const params = useParams();
   const season = params.seasonId || "";
@@ -41,10 +44,11 @@ export const RacesPage: React.FC<RacesPageProps> = ({}) => {
         <PageLoading />
       ) : !sortedData ? (
         <ErrorMessage message="No data available" />
-      ) : view === ViewEnum.GRID ? (
-        <RacesGrid data={sortedData} />
       ) : (
-        <RacesList data={sortedData} />
+        <GridOrList
+          gridElement={<RacesGrid data={sortedData} />}
+          listElement={<RacesList data={sortedData} />}
+        />
       )}
     </div>
   );

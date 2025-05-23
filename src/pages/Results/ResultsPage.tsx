@@ -1,8 +1,12 @@
 import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useGetRaceResults } from "~/API";
-import { ErrorMessage, PageLoading, Pagination } from "~/components";
-import { useViewContext, ViewEnum } from "~/context";
+import {
+  ErrorMessage,
+  GridOrList,
+  PageLoading,
+  Pagination,
+} from "~/components";
 import { usePagination } from "~/helpers";
 import { ResultsGrid } from "./ResultsGrid";
 import { ResultsList } from "./ResultsList";
@@ -22,7 +26,6 @@ interface ResultsPageProps {}
 
 export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
   const styles = useStyles();
-  const [view] = useViewContext();
   const { currentPage, limit, offset, setPage, setPageSize } = usePagination();
   const params = useParams();
   const season = params.seasonId || "";
@@ -60,10 +63,11 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
         <PageLoading />
       ) : !data ? (
         <ErrorMessage message="No data available" />
-      ) : view === ViewEnum.GRID ? (
-        <ResultsGrid data={data} />
       ) : (
-        <ResultsList data={data} />
+        <GridOrList
+          gridElement={<ResultsGrid data={data} />}
+          listElement={<ResultsList data={data} />}
+        />
       )}
     </div>
   );
