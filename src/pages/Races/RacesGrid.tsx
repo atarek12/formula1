@@ -14,7 +14,7 @@ import React from "react";
 import type { IGetSeasonRacesResponse } from "~/API";
 import { Grid } from "~/components";
 import { ItemCard } from "~/components/ItemCard";
-import { useGetPinnedRaces } from "~/context";
+import { useGetPreferredRaces } from "~/context";
 import { formatDate, getRaceResultsLink } from "~/helpers";
 
 const useStyles = makeStyles({
@@ -36,7 +36,7 @@ interface RacesGridProps {
 
 export const RacesGrid: React.FC<RacesGridProps> = ({ data }) => {
   const styles = useStyles();
-  const [pinnedRaces, setPinnedRaces] = useGetPinnedRaces(
+  const [pinnedRaces, setPinnedRaces] = useGetPreferredRaces(
     data.RaceTable.season,
   );
 

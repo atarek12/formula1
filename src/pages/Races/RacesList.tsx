@@ -12,7 +12,7 @@ import {
 import React from "react";
 import type { IGetSeasonRacesResponse, TRace } from "~/API";
 import { ButtonLink, FluentLink, Table } from "~/components";
-import { useGetPinnedRaces } from "~/context";
+import { useGetPreferredRaces } from "~/context";
 import { formatDate, getRaceResultsLink } from "~/helpers";
 
 interface RacesListProps {
@@ -20,7 +20,7 @@ interface RacesListProps {
 }
 
 export const RacesList: React.FC<RacesListProps> = ({ data }) => {
-  const [pinnedRaces, setPinnedRaces] = useGetPinnedRaces(
+  const [pinnedRaces, setPinnedRaces] = useGetPreferredRaces(
     data.RaceTable.season,
   );
 
