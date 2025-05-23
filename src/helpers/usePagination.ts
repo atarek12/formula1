@@ -1,9 +1,13 @@
 import { useSearchParams } from "react-router-dom";
 
+const KEY = "PREFERRED_PAGE_SIZE";
+
 export function usePagination() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const storagePageSize = localStorage.getItem(KEY);
+  const pageSizeFromStorage = storagePageSize ? Number(storagePageSize) : 30;
   const currentPage = Number(searchParams.get("page")) || 1;
-  const pageSize = Number(searchParams.get("pageSize")) || 30;
+  const pageSize = Number(searchParams.get("pageSize")) || pageSizeFromStorage;
 
   const setPage = (page: number) => {
     searchParams.set("page", String(page));
@@ -12,6 +16,7 @@ export function usePagination() {
 
   const setPageSize = (size: number) => {
     searchParams.set("pageSize", String(size));
+    localStorage.setItem(KEY, String(size));
     setSearchParams(searchParams);
   };
 

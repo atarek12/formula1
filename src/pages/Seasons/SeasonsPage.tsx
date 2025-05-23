@@ -22,7 +22,7 @@ export const SeasonsPage: React.FC<SeasonsPageProps> = () => {
       <h1>All Seasons</h1>
       <Pagination
         totalItems={data?.total}
-        pageSize={data?.limit}
+        pageSize={limit}
         currentPage={currentPage}
         onPageChange={setPage}
         onPageSizeChange={setPageSize}

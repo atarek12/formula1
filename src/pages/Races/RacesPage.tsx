@@ -32,7 +32,7 @@ export const RacesPage: React.FC<RacesPageProps> = ({}) => {
       <h1>All Races</h1>
       <Pagination
         totalItems={sortedData?.total}
-        pageSize={sortedData?.limit}
+        pageSize={limit}
         currentPage={currentPage}
         onPageChange={setPage}
         onPageSizeChange={setPageSize}

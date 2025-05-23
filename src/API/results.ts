@@ -24,7 +24,8 @@ export const useGetRaceResults = (params: IGetRaceResultsRequest) => {
   const { season, round, limit = 30, offset = 0 } = params;
 
   return useQuery<IGetRaceResultsResponse>({
-    queryKey: ["seasons"],
+    queryKey: ["results", season, round, limit, offset],
+    enabled: !!season && !!round,
     queryFn: () =>
       baseFetch<IGetRaceResultsResponse>(
         `${season}/${round}/results.json?limit=${limit}&offset=${offset}`,

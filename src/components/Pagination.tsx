@@ -71,33 +71,35 @@ export const Pagination: React.FC<PaginationProps> = ({
           ))}
         </Select>
       </div>
-      <div className={styles.flex}>
-        <Label>Pagination:</Label>
-        <Tooltip content="Next page" relationship="label">
-          <Button
-            icon={<ArrowLeftRegular />}
-            disabled={currentPage === 1}
-            onClick={handlePreviousPage}
-          />
-        </Tooltip>
-        <Select
-          value={currentPage}
-          onChange={(e) => onPageChange?.(Number(e.target.value))}
-        >
-          {Array.from({ length: totalPages }, (_, index) => (
-            <option key={index} value={index + 1}>
-              {index + 1}
-            </option>
-          ))}
-        </Select>
-        <Tooltip content="Previous page" relationship="label">
-          <Button
-            icon={<ArrowRightRegular />}
-            disabled={currentPage === totalPages}
-            onClick={handleNextPage}
-          />
-        </Tooltip>
-      </div>
+      {totalPages !== 1 && (
+        <div className={styles.flex}>
+          <Label>Pagination:</Label>
+          <Tooltip content="Next page" relationship="label">
+            <Button
+              icon={<ArrowLeftRegular />}
+              disabled={currentPage === 1}
+              onClick={handlePreviousPage}
+            />
+          </Tooltip>
+          <Select
+            value={currentPage}
+            onChange={(e) => onPageChange?.(Number(e.target.value))}
+          >
+            {Array.from({ length: totalPages }, (_, index) => (
+              <option key={index} value={index + 1}>
+                {index + 1}
+              </option>
+            ))}
+          </Select>
+          <Tooltip content="Previous page" relationship="label">
+            <Button
+              icon={<ArrowRightRegular />}
+              disabled={currentPage === totalPages}
+              onClick={handleNextPage}
+            />
+          </Tooltip>
+        </div>
+      )}
     </div>
   );
 };

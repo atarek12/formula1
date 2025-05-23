@@ -38,9 +38,8 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   return (
     <Card
       orientation="horizontal"
-      onClick={onCardClick}
-      onKeyDown={onCardKeyDown}
-      focusMode="tab-exit"
+      onClick={url ? onCardClick : undefined}
+      onKeyDown={url ? onCardKeyDown : undefined}
     >
       {icon && <CardPreview>{icon}</CardPreview>}
 
@@ -51,6 +50,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
           url && (
             <Tooltip content={tooltip || ""} relationship="label">
               <ButtonLink
+                ref={linkRef}
                 iconPosition="after"
                 icon={<ArrowRightRegular />}
                 to={url}

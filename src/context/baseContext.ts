@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 
 type TUpdaterCallback<T> = (prev: T) => T;
 type TUpdater<T> = T | TUpdaterCallback<T>;
@@ -30,12 +30,6 @@ export function useReactQueryContext<T>(key: string, initial: T) {
 
     [mutate, data],
   );
-
-  useEffect(() => {
-    if (!data && initial) {
-      update(initial);
-    }
-  }, [data, initial, update]);
 
   return { data: (data as T) || initial, update };
 }
