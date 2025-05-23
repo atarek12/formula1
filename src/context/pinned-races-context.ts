@@ -1,7 +1,10 @@
+import { LocalStorageKeys } from "~/helpers/const";
 import { useReactQueryContext } from "./baseContext";
 
+const KEY_PREFIX = LocalStorageKeys.PINNED_RACES_;
+
 export function useGetPinnedRaces(season: string) {
-  const KEY = `PINNED_RACES_${season}`;
+  const KEY = `${KEY_PREFIX}${season}`;
 
   const storageValue = localStorage.getItem(KEY);
 

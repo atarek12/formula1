@@ -1,6 +1,7 @@
+import { LocalStorageKeys } from "~/helpers/const";
 import { useReactQueryContext } from "./baseContext";
 
-const KEY = "PREFERRED_VIEW";
+const KEY = LocalStorageKeys.PREFERRED_VIEW;
 
 export const ViewEnum = {
   LIST: "LIST",
