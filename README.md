@@ -1,6 +1,6 @@
 # Formula 1
 
-This application list all F1 seasons and its results.
+This application list all F1 seasons and its results. [Live App](https://formula1-rho.vercel.app/)
 
 ## To run the project
 
