@@ -8,7 +8,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { BreadcrumbButtonLink } from "./BreadcrumbButtonLink";
 import { useGetRaceResults } from "~/API";
-import { usePrevious } from "~/helpers";
+import { getRaceResultsLink, getRacesLink, usePrevious } from "~/helpers";
 
 const useStyles = makeStyles({
   root: {
@@ -35,15 +35,15 @@ export const AppBreadcrumbs: React.FC<AppBreadcrumbsProps> = () => {
       ? [
           {
             name: `Season ${params.seasonId}`,
-            path: `/seasons/${params.seasonId}/races`,
+            path: getRacesLink(params.seasonId),
           },
         ]
       : []),
-    ...(params.roundId
+    ...(params.roundId && params.seasonId
       ? [
           {
             name: data?.RaceTable.Races[0].raceName ?? previousRaceName,
-            path: `/seasons/${params.seasonId}/races/${params.roundId}/results`,
+            path: getRaceResultsLink(params.seasonId, params.roundId),
           },
         ]
       : []),
@@ -56,7 +56,7 @@ export const AppBreadcrumbs: React.FC<AppBreadcrumbsProps> = () => {
         return (
           // eslint-disable-next-line react-x/no-array-index-key
           <React.Fragment key={index}>
-            <BreadcrumbItem>
+            <BreadcrumbItem data-testid="breadcrumb-item">
               <BreadcrumbButtonLink to={item.path} current={isLastItem}>
                 {item.name}
               </BreadcrumbButtonLink>

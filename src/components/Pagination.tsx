@@ -64,9 +64,13 @@ export const Pagination: React.FC<PaginationProps> = ({
     <div className={styles.root}>
       <div className={styles.flex}>
         <Label>Page Size:</Label>
-        <Select value={pageSize} onChange={handlePageSizeChange}>
+        <Select
+          data-testid="select-pagesize"
+          value={pageSize}
+          onChange={handlePageSizeChange}
+        >
           {PageSizeOptions.map((size) => (
-            <option key={size} value={size}>
+            <option data-testid="pagesize-option" key={size} value={size}>
               {size}
             </option>
           ))}
@@ -77,23 +81,30 @@ export const Pagination: React.FC<PaginationProps> = ({
           <Label>Pagination:</Label>
           <Tooltip content="Next page" relationship="label">
             <Button
+              data-testid="button-previous-page"
               icon={<ArrowLeftRegular />}
               disabled={currentPage === 1}
               onClick={handlePreviousPage}
             />
           </Tooltip>
           <Select
+            data-testid="select-current-page"
             value={currentPage}
             onChange={(e) => onPageChange?.(Number(e.target.value))}
           >
             {Array.from({ length: totalPages }, (_, index) => (
-              <option key={index} value={index + 1}>
+              <option
+                data-testid="current-page-option"
+                key={index}
+                value={index + 1}
+              >
                 {index + 1}
               </option>
             ))}
           </Select>
           <Tooltip content="Previous page" relationship="label">
             <Button
+              data-testid="button-next-page"
               icon={<ArrowRightRegular />}
               disabled={currentPage === totalPages}
               onClick={handleNextPage}

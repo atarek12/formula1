@@ -34,16 +34,3 @@ export function convertMillisToTime(millis: number) {
 
   return `${hours}:${minutes}:${seconds}.${milliseconds}`;
 }
-
-// it could be 1:21:14.894 or 21:14.894 or 14.894 or 894
-export function convertTimeToMillis(time: string) {
-  const timeParts = time.split(":").reverse();
-  let millis = 0;
-
-  for (let i = 0; i < timeParts.length; i++) {
-    const part = parseInt(timeParts[i], 10);
-    millis += part * Math.pow(60, i) * 1000;
-  }
-
-  return millis;
-}

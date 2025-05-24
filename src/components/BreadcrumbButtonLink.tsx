@@ -44,7 +44,12 @@ export const BreadcrumbButtonLink = ({
       aria-disabled={props.disabled}
       onClick={handleOnClick}
     >
-      <BreadcrumbButton role="none" tabIndex={-1} {...props} />
+      <BreadcrumbButton
+        role="none"
+        data-testid="breadcrumb-link"
+        tabIndex={-1}
+        {...props}
+      />
     </Link>
   );
 };
