@@ -5,7 +5,7 @@ import {
   type ChartProps,
 } from "@fluentui/react-charts";
 import type { TResult } from "~/API";
-import { getDriverFullName } from "~/helpers";
+import { convertMillisToTime, getDriverFullName } from "~/helpers";
 import { makeStyles, tokens } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
@@ -41,7 +41,7 @@ export const ResultsChart: React.FC<ResultsChartProps> = ({
 
   const data: ChartProps[] = useMemo(() => {
     return resultsWithTime.map<ChartProps>((result) => ({
-      chartTitle: getDriverFullName(result.Driver),
+      chartTitle: `${getDriverFullName(result.Driver)}  ${result.Time?.time}`,
       chartData: [
         {
           legend: getDriverFullName(result.Driver),
@@ -52,7 +52,8 @@ export const ResultsChart: React.FC<ResultsChartProps> = ({
           color: highlightDrivers?.includes(result.Driver.driverId)
             ? tokens.colorStatusSuccessBackground3
             : tokens.colorBrandBackground,
-          yAxisCalloutData: `${result.Time?.time}.`,
+          yAxisCalloutData: convertMillisToTime(Number(result.Time!.millis)),
+          xAxisCalloutData: getDriverFullName(result.Driver),
         },
       ],
     }));
