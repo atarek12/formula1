@@ -1,9 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { RacesPage } from "./Races";
 import { AppWrapper } from "~/components";
-import { SeasonsPage } from "./Seasons";
-import { ResultsPage } from "./Results";
-import { NotFound } from "./NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -12,19 +8,31 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <SeasonsPage />,
+        async lazy() {
+          const { SeasonsPage } = await import("./Seasons");
+          return { Component: SeasonsPage };
+        },
       },
       {
         path: "seasons/:seasonId/races",
-        element: <RacesPage />,
+        async lazy() {
+          const { RacesPage } = await import("./Races");
+          return { Component: RacesPage };
+        },
       },
       {
         path: "seasons/:seasonId/races/:roundId/results",
-        element: <ResultsPage />,
+        async lazy() {
+          const { ResultsPage } = await import("./Results");
+          return { Component: ResultsPage };
+        },
       },
       {
         path: "*",
-        element: <NotFound />,
+        async lazy() {
+          const { NotFound } = await import("./NotFound");
+          return { Component: NotFound };
+        },
       },
     ],
   },
