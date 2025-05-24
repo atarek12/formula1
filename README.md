@@ -41,3 +41,8 @@ yarn dev
 - context: contains state managements.
 - helpers: contains the shared utils and hooks across the project.
 - pages: contains the application pages.
+
+## Tests
+
+- Unit tests using vitest for some components
+- E2E tests using playwright for the seasons page
