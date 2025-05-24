@@ -15,5 +15,9 @@ interface GridProps {
 
 export const Grid: React.FC<GridProps> = ({ children }) => {
   const styles = useStyles();
-  return <div className={styles.root}>{children}</div>;
+  return (
+    <div data-testid="grid" className={styles.root}>
+      {children}
+    </div>
+  );
 };

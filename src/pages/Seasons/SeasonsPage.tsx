@@ -21,7 +21,7 @@ export const SeasonsPage: React.FC<SeasonsPageProps> = () => {
   }
 
   return (
-    <div>
+    <div data-testid="seasons-page">
       <h1>F1 Seasons</h1>
       <Pagination
         totalItems={data?.total}

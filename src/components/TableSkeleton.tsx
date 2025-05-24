@@ -58,7 +58,12 @@ export const TableSkeleton: React.FC<TableSkeletonProps> = ({
   ];
 
   return (
-    <DataGrid items={rows} columns={columns}>
+    <DataGrid
+      items={rows}
+      columns={columns}
+      aria-label="Loading Table"
+      data-testid="loading-table"
+    >
       <DataGridHeader>
         <DataGridRow>
           {({ renderHeaderCell }) => (

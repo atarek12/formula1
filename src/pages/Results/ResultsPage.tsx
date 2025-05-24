@@ -34,7 +34,7 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({}) => {
   }
 
   return (
-    <div>
+    <div data-testid="results-page">
       <h1>Race Results</h1>
       <DriversSelector
         drivers={drivers}

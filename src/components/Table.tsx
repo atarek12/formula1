@@ -33,9 +33,9 @@ export function Table<T>({
   const styles = useStyles();
 
   return (
-    <DataGrid items={rows} columns={columns}>
+    <DataGrid data-testid="table" items={rows} columns={columns}>
       <DataGridHeader>
-        <DataGridRow>
+        <DataGridRow data-testid="table-header">
           {({ renderHeaderCell }) => (
             <DataGridHeaderCell>{renderHeaderCell()}</DataGridHeaderCell>
           )}
@@ -47,6 +47,7 @@ export function Table<T>({
           return (
             <DataGridRow
               key={rowId}
+              data-testid="table-row"
               className={highlightRows?.includes(itemId) && styles.highlight}
             >
               {({ renderCell }) => (

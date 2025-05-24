@@ -89,6 +89,7 @@ export const SwitchView: React.FC<SwitchViewProps> = ({}) => {
       positioning="below"
     >
       <div
+        data-testid="switch-view"
         className={styles.root}
         tabIndex={0}
         role="radiogroup"

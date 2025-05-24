@@ -61,7 +61,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className={styles.root}>
+    <div data-testid="pagination" className={styles.root}>
       <div className={styles.flex}>
         <Label>Page Size:</Label>
         <Select

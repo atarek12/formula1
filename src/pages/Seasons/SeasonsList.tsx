@@ -24,7 +24,12 @@ export const SeasonsList: React.FC<SeasonsListProps> = ({ data }) => {
           content={`View Races for ${item.season} season`}
           relationship="description"
         >
-          <FluentLink to={getRacesLink(item.season)}>{item.season}</FluentLink>
+          <FluentLink
+            data-testid="seasons-races-link"
+            to={getRacesLink(item.season)}
+          >
+            {item.season}
+          </FluentLink>
         </Tooltip>
       ),
     }),
@@ -42,6 +47,7 @@ export const SeasonsList: React.FC<SeasonsListProps> = ({ data }) => {
       renderHeaderCell: () => null,
       renderCell: (item) => (
         <ButtonLink
+          data-testid="seasons-races-button"
           iconPosition="after"
           icon={<ArrowRightRegular />}
           to={getRacesLink(item.season)}

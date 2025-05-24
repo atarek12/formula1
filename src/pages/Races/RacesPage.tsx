@@ -31,7 +31,7 @@ export const RacesPage: React.FC<RacesPageProps> = ({}) => {
   }
 
   return (
-    <div>
+    <div data-testid="races-page">
       <h1>All Races</h1>
       <Pagination
         totalItems={sortedData?.total}
