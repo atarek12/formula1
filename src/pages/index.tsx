@@ -3,6 +3,7 @@ import { RacesPage } from "./Races";
 import { AppWrapper } from "~/components";
 import { SeasonsPage } from "./Seasons";
 import { ResultsPage } from "./Results";
+import { NotFound } from "./NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path: "seasons/:seasonId/races/:roundId/results",
         element: <ResultsPage />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
