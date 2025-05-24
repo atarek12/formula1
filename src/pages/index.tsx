@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import { AppWrapper } from "~/components";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <AppWrapper />,
+    ErrorBoundary: ErrorBoundary,
     children: [
       {
         path: "",
